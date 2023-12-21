@@ -251,8 +251,11 @@ void Slave()
 					if (neighbors >= 4) Row[i] = empty;
 					if (neighbors < 2) Row[i] = empty;
 				} else
-				if (Row[i] == empty){
+				if (Row[i] != occ){
 					if (neighbors == 3) Row[i] = occ;
+				}
+				if (Row[i] != occ){
+					Row[i] = 4*rank;
 				}
 			}
 			mp[RowNum] = Row;
@@ -288,6 +291,6 @@ int main(int argc,char *argv[])
 		WritePGM("final.pgm",imgWidth,imgHeight);
 		FreeMem(imgWidth,imgHeight);
 	} else
-		Slave();	
+		Slave();
 	MPI_Finalize();
 }

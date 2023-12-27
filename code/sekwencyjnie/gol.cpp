@@ -5,9 +5,9 @@
 
 int rank,size;
 char **Image;
-const int imgWidth=100;
-const int imgHeight=100;
-const int stepLimit=100;
+const int imgWidth=200;
+const int imgHeight=200;
+const int stepLimit=1000;
 
 void AllocMem(int Width,int Height) 
 {
@@ -25,34 +25,34 @@ void FreeMem(int Width,int Height)
 
 void WritePGM(const char *fname, int Width, int Height)
 {
-    FILE *file = fopen(fname, "wt");
-    if (file == NULL)
-    {
-        printf("Error opening file: %s\n", fname);
-        return;
-    }
+    // FILE *file = fopen(fname, "wt");
+    // if (file == NULL)
+    // {
+    //     printf("Error opening file: %s\n", fname);
+    //     return;
+    // }
 
-    fprintf(file, "P3\n%d %d\n255\n", Width, Height);
+    // fprintf(file, "P3\n%d %d\n255\n", Width, Height);
 
-    for (int i = 0; i < Height; i++)
-    {
-        for (int j = 0; j < Width; j++)
-        {
-            if (Image[i][j] == '#')
-            {
-                // Use color for "#"
-                fprintf(file, "255 0 0 "); // Red color (you can modify these values)
-            }
-            else
-            {
-                // Use color for " "
-                fprintf(file, "255 255 255 "); // White color (you can modify these values)
-            }
-        }
-        fprintf(file, "\n");
-    }
+    // for (int i = 0; i < Height; i++)
+    // {
+    //     for (int j = 0; j < Width; j++)
+    //     {
+    //         if (Image[i][j] == '#')
+    //         {
+    //             // Use color for "#"
+    //             fprintf(file, "255 0 0 "); // Red color (you can modify these values)
+    //         }
+    //         else
+    //         {
+    //             // Use color for " "
+    //             fprintf(file, "255 255 255 "); // White color (you can modify these values)
+    //         }
+    //     }
+    //     fprintf(file, "\n");
+    // }
 
-    fclose(file);
+    // fclose(file);
 }
 
 

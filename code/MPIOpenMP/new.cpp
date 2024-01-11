@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <mpi.h>
-
+#include <omp.h>
 
 int ***Image;
 
@@ -17,7 +17,6 @@ int main(int argc, char *argv[]) {
     int stepLimit = atoi(argv[2]);
     AllocateMemory(imgSize);
     InitImage(imgSize);
-
 
     MPI_Init(&argc, &argv);
 
@@ -37,7 +36,6 @@ int main(int argc, char *argv[]) {
     }
 
     MPI_Finalize();
-
 
     FreeMemory(imgSize);
     return 0;
@@ -110,7 +108,8 @@ void GameOfLifeParralel(int n, int stepLimit, int rank, int numOfProcesses) {
 
         int actualIndex = step & 1;
         int prevIndex = 1 - actualIndex;
-
+        
+        #pragma omp parallel for
         for (int i = minRow; i <= maxRow; i++) {
             for (int j = 1; j < n - 1; ++j) {
                 int neighbors = 0;

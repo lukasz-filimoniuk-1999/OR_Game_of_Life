@@ -134,22 +134,22 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
                 if(Image[prevIndex][i+1][j])neighbors++;
                 if(Image[prevIndex][i+1][j+1])neighbors++;
 
-                if(Image[prevIndex][i][j]){
-                    if(neighbors > 3){
+                if(Image[prevIndex][i][j]) {
+                    if(neighbors > 3) {
                         Image[actualIndex][i][j] = 0;
                     }
-                    else if(neighbors < 2){
+                    else if(neighbors < 2) {
                         Image[actualIndex][i][j] = 0;
                     }
-                    else{
+                    else {
                         Image[actualIndex][i][j] = 1;
                     }
                 }
                 else{
-                    if(neighbors == 3){
+                    if(neighbors == 3) {
                         Image[actualIndex][i][j] = 1;
                     }
-                    else{
+                    else {
                         Image[actualIndex][i][j] = 0;
                     }
                 }
@@ -159,8 +159,8 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
         int rec, rec2, rec3, rec4;
         int send, send2, send3, send4;
 
-        if(rankRow == 0){
-            if(rankColumn == 0){
+        if(rankRow == 0) {
+            if(rankColumn == 0) {
                 MPI_Request reqtab[4];
                 MPI_Status stattab[4];
                 MPI_Isend(&send, 1, MPI_INT, rank+1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -169,7 +169,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
                 MPI_Irecv(&rec2, 1, MPI_INT, rank+squareSize, 0, MPI_COMM_WORLD, &reqtab[3]);
                 MPI_Waitall(4,reqtab,stattab);
             }
-            else if(rankColumn == squareSize - 1){
+            else if(rankColumn == squareSize - 1) {
                 MPI_Request reqtab[4];
                 MPI_Status stattab[4];
                 MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -178,7 +178,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
                 MPI_Irecv(&rec2, 1, MPI_INT, rank+squareSize, 0, MPI_COMM_WORLD, &reqtab[3]);
                 MPI_Waitall(4,reqtab,stattab);
             }
-            else{
+            else {
                 MPI_Request reqtab[6];
                 MPI_Status stattab[6];
                 MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -191,7 +191,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
             }
         }
         else if(rankRow == squareSize - 1){
-            if(rankColumn == 0){
+            if(rankColumn == 0) {
                 MPI_Request reqtab[4];
                 MPI_Status stattab[4];
                 MPI_Isend(&send, 1, MPI_INT, rank+1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -200,7 +200,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
                 MPI_Irecv(&rec2, 1, MPI_INT, rank-squareSize, 0, MPI_COMM_WORLD, &reqtab[3]);
                 MPI_Waitall(4,reqtab,stattab);
             }
-            else if(rankColumn == squareSize - 1){
+            else if(rankColumn == squareSize - 1) {
                 MPI_Request reqtab[4];
                 MPI_Status stattab[4];
                 MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -209,7 +209,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
                 MPI_Irecv(&rec2, 1, MPI_INT, rank-squareSize, 0, MPI_COMM_WORLD, &reqtab[3]);
                 MPI_Waitall(4,reqtab,stattab);
             }
-            else{
+            else {
                 MPI_Request reqtab[6];
                 MPI_Status stattab[6];
                 MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -222,7 +222,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
             }
         }
         else{
-            if(rankColumn == 0){
+            if(rankColumn == 0) {
                 MPI_Request reqtab[6];
                 MPI_Status stattab[6];
                 MPI_Isend(&send, 1, MPI_INT, rank+1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -233,7 +233,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
                 MPI_Irecv(&rec3, 1, MPI_INT, rank+squareSize, 0, MPI_COMM_WORLD, &reqtab[5]);
                 MPI_Waitall(6,reqtab,stattab);
             }
-            else if(rankColumn == squareSize - 1){
+            else if(rankColumn == squareSize - 1) {
                 MPI_Request reqtab[6];
                 MPI_Status stattab[6];
                 MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -244,7 +244,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
                 MPI_Irecv(&rec3, 1, MPI_INT, rank+squareSize, 0, MPI_COMM_WORLD, &reqtab[5]);
                 MPI_Waitall(6,reqtab,stattab);
             }
-            else{
+            else {
                 MPI_Request reqtab[8];
                 MPI_Status stattab[8];
                 MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -259,7 +259,7 @@ void GameOfLifeParralelSquares(int n, int stepLimit, int rank, int numOfProcesse
             }
         }
 
-        // if(rank == 0){
+        // if(rank == 0) {
         //     char stepFileName[20];
         //     sprintf(stepFileName, "%dstep.ppm", step);
         //     WritePGM(stepFileName, n, actualIndex);

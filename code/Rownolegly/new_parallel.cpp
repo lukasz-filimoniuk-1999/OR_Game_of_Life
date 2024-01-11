@@ -53,7 +53,7 @@ void AllocateMemory(int n) {
     }
 }
 
-void InitImage(int n){
+void InitImage(int n) {
     for (int i = 0; i < n; i++){
         for (int j = 0; j < n; j++){
             Image[0][i][j] = 0;
@@ -123,19 +123,19 @@ void GameOfLifeParralel(int n, int stepLimit, int rank, int numOfProcesses) {
                 if(Image[prevIndex][i+1][j])neighbors++;
                 if(Image[prevIndex][i+1][j+1])neighbors++;
 
-                if(Image[prevIndex][i][j]){
-                    if(neighbors > 3){
+                if(Image[prevIndex][i][j]) {
+                    if(neighbors > 3) {
                         Image[actualIndex][i][j] = 0;
                     }
-                    else if(neighbors < 2){
+                    else if(neighbors < 2) {
                         Image[actualIndex][i][j] = 0;
                     }
-                    else{
+                    else {
                         Image[actualIndex][i][j] = 1;
                     }
                 }
-                else{
-                    if(neighbors == 3){
+                else {
+                    if(neighbors == 3) {
                         Image[actualIndex][i][j] = 1;
                     }
                     else{
@@ -148,7 +148,7 @@ void GameOfLifeParralel(int n, int stepLimit, int rank, int numOfProcesses) {
         int rec, rec2;
         int send, send2;
 
-        if(rank == 0){
+        if(rank == 0) {
             MPI_Request reqtab[2];
             MPI_Status stattab[2];
             MPI_Isend(&send, 1, MPI_INT, rank+1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -156,7 +156,7 @@ void GameOfLifeParralel(int n, int stepLimit, int rank, int numOfProcesses) {
             MPI_Waitall(2,reqtab,stattab);
         }
 
-        else if(rank == numOfProcesses - 1){
+        else if(rank == numOfProcesses - 1) {
             MPI_Request reqtab[2];
             MPI_Status stattab[2];
             MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -164,7 +164,7 @@ void GameOfLifeParralel(int n, int stepLimit, int rank, int numOfProcesses) {
             MPI_Waitall(2,reqtab,stattab);
         }
 
-        else{
+        else { 
             MPI_Request reqtab[4];
             MPI_Status stattab[4];
             MPI_Isend(&send, 1, MPI_INT, rank-1, 0, MPI_COMM_WORLD, &reqtab[0]);
@@ -174,7 +174,7 @@ void GameOfLifeParralel(int n, int stepLimit, int rank, int numOfProcesses) {
             MPI_Waitall(4,reqtab,stattab);
         }
 
-        // if(rank == 0){
+        // if(rank == 0) {
         //     char stepFileName[20];
         //     sprintf(stepFileName, "%dstep.ppm", step);
         //     WritePGM(stepFileName, n, actualIndex);

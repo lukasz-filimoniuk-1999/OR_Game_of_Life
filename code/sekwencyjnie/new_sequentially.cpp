@@ -117,22 +117,22 @@ void GameOfLifeCPU(int n, int stepLimit) {
                 if(Image[prevIndex][i+1][j])neighbors++;
                 if(Image[prevIndex][i+1][j+1])neighbors++;
 
-                if(Image[prevIndex][i][j]){
+                if(Image[prevIndex][i][j]) {
                     if(neighbors > 3){
                         Image[actualIndex][i][j] = 0;
                     }
-                    else if(neighbors < 2){
+                    else if(neighbors < 2) {
                         Image[actualIndex][i][j] = 0;
                     }
                     else{
                         Image[actualIndex][i][j] = 1;
                     }
                 }
-                else{
-                    if(neighbors == 3){
+                else {
+                    if(neighbors == 3) {
                         Image[actualIndex][i][j] = 1;
                     }
-                    else{
+                    else {
                         Image[actualIndex][i][j] = 0;
                     }
                 }

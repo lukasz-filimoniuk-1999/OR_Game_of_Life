@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
 
-    printf("Execution time: %5.3f msecs\n", duration.count());
+    printf("Execution time: %d msecs\n", duration.count());
 
     WritePGM("final.pgm", imgSize, (stepLimit-1)%2);
 

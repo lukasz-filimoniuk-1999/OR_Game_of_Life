@@ -165,7 +165,7 @@ void GameOfLifeGPU(int n, int stepLimit) {
         dim3 gridSize((n + blockSize.x - 1) / blockSize.x, (n + blockSize.y - 1) / blockSize.y);
 
         GOLKernel <<<gridSize, blockSize>>> (d_Image, d_outputImage, n, stepLimit);
-        if (step == stepLimit) {
+        if (step == stepLimit-1) {
             cudaMemcpy(h_outputImage, d_outputImage, n * n * sizeof(int), cudaMemcpyDeviceToHost);
 
             for (int i = 0; i < n; ++i) {
